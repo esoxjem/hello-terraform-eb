@@ -27,7 +27,7 @@ variable "public_subnets" {}
 variable "AssociatePublicIpAddress" {
   type = bool
 }
-variable "LoadBalancerType" {
+variable "EnvironmentType" {
   type = string
 }
 variable "ELBScheme" {
@@ -35,4 +35,24 @@ variable "ELBScheme" {
 }
 variable "SystemType" {
   type = string
+}
+
+variable "MatcherHTTPCode" {
+  type = number
+}
+
+variable "DeploymentPolicy" {
+  type = string
+}
+
+variable "RetentionInDays" {
+  type = number
+}
+
+variable "StreamLogs" {
+  type = bool
+}
+
+variable "DeleteOnTerminate" {
+  type = bool
 }

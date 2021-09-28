@@ -54,7 +54,7 @@ resource "aws_elastic_beanstalk_environment" "eb_environment" {
   setting {
     namespace = "aws:elasticbeanstalk:environment"
     name      = "EnvironmentType"
-    value     = "LoadBalanced"
+    value     = var.EnvironmentType
   }
 
   # Health
@@ -66,24 +66,31 @@ resource "aws_elastic_beanstalk_environment" "eb_environment" {
   setting {
     namespace = "aws:elasticbeanstalk:environment:process:default"
     name      = "MatcherHTTPCode"
-    value     = 200
+    value     = var.MatcherHTTPCode
   }
 
   # CloudWatch
   setting {
     namespace = "aws:elasticbeanstalk:cloudwatch:logs"
     name      = "StreamLogs"
-    value     = false
+    value     = var.StreamLogs
   }
   setting {
     namespace = "aws:elasticbeanstalk:cloudwatch:logs"
     name      = "DeleteOnTerminate"
-    value     = false
+    value     = var.DeleteOnTerminate
   }
   setting {
     namespace = "aws:elasticbeanstalk:cloudwatch:logs"
     name      = "RetentionInDays"
-    value     = 7
+    value     = var.RetentionInDays
+  }
+
+  # Deployment Strategy
+  setting {
+    namespace = "aws:elasticbeanstalk:command"
+    name      = "DeploymentPolicy"
+    value     = var.DeploymentPolicy
   }
 
   # Environment Variables
@@ -91,12 +98,5 @@ resource "aws_elastic_beanstalk_environment" "eb_environment" {
     namespace = "aws:elasticbeanstalk:application:environment"
     name      = "EaxmpleKey"
     value     = "ExampleValue"
-  }
-
-  # Deployment Strategy
-  setting {
-    namespace = "aws:elasticbeanstalk:command"
-    name      = "DeploymentPolicy"
-    value     = "Immutable"
   }
 }
